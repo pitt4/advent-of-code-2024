@@ -12,16 +12,15 @@ BEGIN {}
 
     # RLENGTH is set to -1 if no match
     mul_start = match(string, /mul\([0-9][0-9]?[0-9]?,[0-9][0-9]?[0-9]?\)/)
+    if (RLENGTH == -1) {break}
 
-    if (RLENGTH != -1) {
-      mul = substr(string, mul_start+4, RLENGTH-5)
+    mul = substr(string, mul_start+4, RLENGTH-5)
 
-      # remove anything up to and including mul from string
-      string = substr(string, mul_start+RLENGTH-1)
+    # remove anything up to and including mul from string
+    string = substr(string, mul_start+RLENGTH-1)
 
-      split(mul, mul_val, ",")
-      result += mul_val[1] * mul_val[2]
-    } else {break}
+    split(mul, mul_val, ",")
+    result += mul_val[1] * mul_val[2]
   }
 }
 
